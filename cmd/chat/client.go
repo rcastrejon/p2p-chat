@@ -51,12 +51,12 @@ func (c *ChatClient) listenForMessages() {
 
 		// We want to avoid blocking the listener, so we CAN spawn a goroutine to
 		// handle the message (probably not necessary for our small program).
-		m := pb.Message{}
-		err := proto.Unmarshal(buf[:n], &m)
+		m := &pb.Message{}
+		err := proto.Unmarshal(buf[:n], m)
 		if err != nil {
 			continue
 		}
-		c.sub <- &m
+		c.sub <- m
 	}
 }
 

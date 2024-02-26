@@ -10,6 +10,7 @@ import (
 	"github.com/charmbracelet/lipgloss"
 	"github.com/rcastrejon/p2p-chat/cmd/chat"
 	"github.com/rcastrejon/p2p-chat/pb"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type replyMsg struct {
@@ -100,7 +101,11 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case tea.KeyEnter:
 			// this will send a message to the peer with the alias of "Peer", so that the
 			// receiver displays the message as coming from "Peer".
-			message := pb.NewMessage("Peer", m.textarea.Value())
+			message := &pb.Message{
+				Alias:     "Peer",
+				Body:      m.textarea.Value(),
+				Timestamp: timestamppb.Now(),
+			}
 			m.conn.Send(message)
 
 			m.messages = append(m.messages, m.senderStyle.Render("You: ")+m.textarea.Value())
@@ -129,5 +134,5 @@ func (m model) View() string {
 		m.viewport.View(),
 		m.textarea.View(),
 		"(esc to quit)",
-	) + "\n\n"
+	) + "\n"
 }
