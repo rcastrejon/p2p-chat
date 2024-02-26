@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "github.com/rcastrejon/p2p-chat/cmd"
 
 func main() {
-	fmt.Println("Hello, world!")
+	cmd.Execute()
 }

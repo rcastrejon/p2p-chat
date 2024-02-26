@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "github.com/rcastrejon/p2p-chat/pb";
+import "google/protobuf/timestamp.proto";
+
+message Message {
+  string alias = 1;
+  string body = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
