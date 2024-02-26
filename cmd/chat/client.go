@@ -73,6 +73,7 @@ func (c *ChatClient) Send(message *pb.Message) error {
 	return err
 }
 
+// Receives a message from the connection. This is a blocking function.
 func (c *ChatClient) Receive() *pb.Message {
 	return <-c.sub
 }

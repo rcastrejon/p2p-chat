@@ -10,9 +10,6 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "p2p-chat",
 	Short: "A bare bones peer-to-peer chat client",
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

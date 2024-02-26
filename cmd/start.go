@@ -3,6 +3,7 @@ package cmd
 import (
 	"log"
 
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/rcastrejon/p2p-chat/cmd/chat"
 	"github.com/spf13/cobra"
 )
@@ -18,11 +19,18 @@ var startCmd = &cobra.Command{
 			log.Fatal("Failed to get port flag:\n", err)
 		}
 
+		// Start the peer-to-peer chat client
 		c, err := chat.NewChatClient(args[0], flagPort)
 		if err != nil {
 			log.Fatal("Error initializing chat client: ", err)
 		}
 		defer c.Close()
+
+		// Initialize and run the chat ui
+		p := tea.NewProgram(initialModel(c))
+		if _, err := p.Run(); err != nil {
+			log.Fatal("Error running chat ui: ", err)
+		}
 	},
 }
 
