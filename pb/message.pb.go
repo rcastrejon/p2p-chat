@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.32.0
 // 	protoc        v4.25.3
-// source: pb/massage.proto
+// source: pb/message.proto
 
 package pb
 
